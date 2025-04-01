@@ -7,9 +7,11 @@ services:
     ports:
       - '8080:8080'
       - '8083:8083'
+      - '5005:5005'
     cpus: 1
     mem_limit: 500m
     environment:
+      JAVA_DEBUG: true
       KOGITO_PERSISTENCE_PROTO_MARSHALLER: "false"
       QUARKUS_HTTP_CORS_ORIGINS: /.*/
       # See https://quarkus.io/guides/datasource#jdbc-configuration
@@ -317,8 +319,8 @@ services:
     # mount the local directory that contains your license key to the container.
     # give Redpanda Console read access to the license.
     volumes:
-    # Remove ro?
-      - ./license:/etc/redpanda:ro
+      # Remove ro?
+      - ./license:/etc/redpanda
     entrypoint: /bin/sh
     command: -c 'echo "$$CONSOLE_CONFIG_FILE" > /tmp/config.yml && echo "$$CONSOLE_ROLEBINDINGS_CONFIG_FILE" > /tmp/role-bindings.yml && /app/console'
     environment:
@@ -493,7 +495,7 @@ services:
     volumes:
     # Remove :z?
       - ./tempo/tempo.yaml:/etc/tempo.yaml:z
-      - ./tempo/data:/var/tempo:z
+      - ./tempo/data:/var/tempo
     ports:
       - "3200:3200" # tempo
       - "14317:4317" # otlp grpc
