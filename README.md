@@ -1,20 +1,20 @@
-### ASYNC REPRODUCER ISSUE INSTRUCTIONS
+# ASYNC REPRODUCER ISSUE INSTRUCTIONS
 
 This is based on this PR: https://github.com/apache/incubator-kie-kogito-runtimes/pull/3919
 
 Steps to reproduce:
-1.- fetch and build https://github.com/apache/incubator-kie-kogito-runtimes/pull/3919
-2.- build Santander extensions:
-2.1- build (`mvn clean install`) [kogito-bpmn-custom-user-task-event-listener](kogito-app-example/kogito-custom-extensions/kogito-bpmn-custom-user-task-event-listener)
-2.2- build (`mvn clean install`) [kogito-bpmn-custom-user-task-lifecycle](kogito-app-example/kogito-custom-extensions/kogito-bpmn-custom-user-task-lifecycle)
-3.- Build issue reproducer app:
-3.1.- go to [kogito-bpmn-app-unsecured](kogito-app-example/kogito-bpmn-app-unsecured)
-3.2.- build with `mvn clean install -Pbamoe-community -Pcontainer -Pbamoe-persistence-postgresql`
-3.3.- verify that docker image `dev.local/kogito/kogito-bpmn-app-unsecured:1.0.0-SNAPSHOT` exists
-4.- Start the docker container:
-4.1.- `docker compose --profile full --profile kogito-bpmn-apps up` - BE PATIENT, it needs time and love
-4.2.- when it's ready app should be running at port 8082
-5.- open the `issue_reproducer_plan.jmx` in Jmeter and run it! It should be GREEN :)
+1. fetch and build https://github.com/apache/incubator-kie-kogito-runtimes/pull/3919
+2. build Santander extensions:
+   1. build (`mvn clean install`) [kogito-bpmn-custom-user-task-event-listener](kogito-app-example/kogito-custom-extensions/kogito-bpmn-custom-user-task-event-listener)
+   1. build (`mvn clean install`) [kogito-bpmn-custom-user-task-lifecycle](kogito-app-example/kogito-custom-extensions/kogito-bpmn-custom-user-task-lifecycle)
+3. Build issue reproducer app:
+   1. go to [kogito-bpmn-app-unsecured](kogito-app-example/kogito-bpmn-app-unsecured)
+   2. build with `mvn clean install -Pbamoe-community -Pcontainer -Pbamoe-persistence-postgresql`
+   3. verify that docker image `dev.local/kogito/kogito-bpmn-app-unsecured:1.0.0-SNAPSHOT` exists
+4. Start the docker container:
+   1. `docker compose --profile full --profile kogito-bpmn-apps up` - BE PATIENT, it needs time and love
+   2. when it's ready, the app should be running at port 8082
+5. open the `issue_reproducer_plan.jmx` in Jmeter and run it! It should be GREEN :)
 
 
 # ORIGNINAL DOC HERE STARTING HERE...
